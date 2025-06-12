@@ -43,7 +43,7 @@ contract TestMarketContract is Test {
         vm.prank(buyer);
         store.PurchaseItem{value: 2 * (10 ** DECIMALS)}(0, 2);
 
-        (, , , uint128 quantityLeft) = store.items(0);
+        (,,, uint128 quantityLeft) = store.items(0);
         assertEq(quantityLeft, 3);
     }
 
@@ -54,7 +54,7 @@ contract TestMarketContract is Test {
         vm.prank(buyer);
         store.PurchaseItem{value: 2 * (10 ** DECIMALS)}(0, 2);
 
-        (, , , uint128 quantityLeft) = store.items(0);
+        (,,, uint128 quantityLeft) = store.items(0);
         assertEq(quantityLeft, 0);
     }
 
@@ -83,7 +83,7 @@ contract TestMarketContract is Test {
         vm.prank(vendor);
         store.UpdateItemPrice(0, 3 * (10 ** DECIMALS));
 
-        (, , uint256 price, ) = store.items(0);
+        (,, uint256 price,) = store.items(0);
         assertEq(price, 3 ether);
     }
 
@@ -103,7 +103,7 @@ contract TestMarketContract is Test {
         vm.prank(vendor);
         store.RestockItems(0, 10);
 
-        (, , , uint128 quantity) = store.items(0);
+        (,,, uint128 quantity) = store.items(0);
         assertEq(quantity, 15);
     }
 

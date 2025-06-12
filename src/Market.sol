@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.29;
 
-
 // Get rid of strings inside custom errors
 contract Store {
     uint256 ItemCount;
@@ -28,12 +27,7 @@ contract Store {
         if (_price <= 0) revert ValidPrice("Price Can Not Be Zero");
         if (_quantity <= 0) revert InvalidQuantity("Quantity Can Not Be Zero");
 
-        items[ItemCount] = Item({
-            vendor: payable(msg.sender),
-            name: _name,
-            price: _price,
-            quantity: _quantity
-        });
+        items[ItemCount] = Item({vendor: payable(msg.sender), name: _name, price: _price, quantity: _quantity});
 
         emit ItemAdded(ItemCount, msg.sender, _name, _price, _quantity);
 
@@ -68,10 +62,10 @@ contract Store {
     function RestockItems(uint256 ID, uint128 _quantity) external {
         if (ID >= ItemCount) revert NotAvailable("Item Not In Stock");
         if (_quantity <= 0) revert InvalidQuantity("Quantity Can Not Be Zero");
-        
+
         Item storage item = items[ID];
         if (item.vendor != msg.sender) revert NotOwner("You Are Not The Owner Of The Product");
-        
+
         item.quantity += _quantity;
     }
 
