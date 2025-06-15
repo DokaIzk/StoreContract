@@ -64,7 +64,7 @@ contract Store {
         if (_quantity <= 0) revert InvalidQuantity("Quantity Can Not Be Zero");
 
         Item storage item = items[ID];
-        if (item.vendor != msg.sender) revert NotOwner("You Are Not The Owner Of The Product");
+        if (item.vendor != msg.sender) revert NotOwner("You Are Not The Owner Of This Item");
 
         item.quantity += _quantity;
     }

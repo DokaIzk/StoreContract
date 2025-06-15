@@ -84,7 +84,7 @@ contract TestMarketContract is Test {
         store.UpdateItemPrice(0, 3 * (10 ** DECIMALS));
 
         (,, uint256 price,) = store.items(0);
-        assertEq(price, 3 ether);
+        assertEq(price, 3 * (10 ** DECIMALS));
     }
 
     function testUpdateItemPriceNotOwner() public {
@@ -112,7 +112,7 @@ contract TestMarketContract is Test {
         store.AddItem("Charger", 1 * (10 ** DECIMALS), 3);
 
         vm.prank(buyer);
-        vm.expectRevert(abi.encodeWithSelector(Store.NotOwner.selector, "You Are Not The Owner Of The Product"));
+        vm.expectRevert(abi.encodeWithSelector(Store.NotOwner.selector, "You Are Not The Owner Of This Item"));
         store.RestockItems(0, 2);
     }
 }
